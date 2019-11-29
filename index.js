@@ -103,15 +103,19 @@ const absVer = (key_list,sign,message,policy,attributes) => {
 
 const absSystem = async() => {
     // var key_list;
+    var userid = 'test'
     var attributes = 'SCHIEF,SCHIEF,FRESHMAN,HRD,DD'
     var message = "message";
-    var policy = "HRD AND SCHIEF";
-    // var policy = "DD AND SCHIEF";
+    var policy = "HRD OR SCHIEF";
+    // var policy = "DD AND     SCHIEF";
     // const check = await absSetup();
     const tpk = await absTrusteeSetup(attributes);
     console.log('trustee ok');
     const key_list = await absAuthoritySetup(tpk,attributes);
     console.log("Setup Completed.")
+    userid = userid.toUpperCase()
+    attributes += ','+userid
+    policy += policy + ' AND ' + userid
     const ska = await absAttrgen(key_list,attributes);
     console.log("Key Generated.")
     const sign = await absSign(key_list,ska,message,policy,attributes);

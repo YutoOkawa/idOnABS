@@ -8,7 +8,7 @@ def main():
     data = json.loads(sys.stdin.readline())
     ask = absinst.decodestr(data['ask'])
     attributes = data['attr'].split(',')
-    ska = absinst.generateattributes(ask,['HRD','SCHIEF'],attributes)
+    ska = absinst.generateattributes(ask,['HRD','TEST'],attributes)
     response = {"ska":absinst.encodestr(ska)}
     print(json.dumps(response))
 
