@@ -25,7 +25,7 @@ class ABS:
         Attributes have to be appended to the end for global-ness
         '''
         tpk = {}
-        tmax = 2*(len(attributes)+1)
+        tmax = len(attributes)+1
 
         tpk['g'] = self.group.random(G1)
         for i in range(tmax+1): #provide the rest of the generators
@@ -50,7 +50,7 @@ class ABS:
         ask = {}
         apk = {}
         # tmax = 2 * len(tpk['atr'])
-        tmax = 2 * (len(attributes)+1)
+        tmax = len(attributes)+1
 
         group = self.group
         a0,a,b = group.random(ZR), group.random(ZR), group.random(ZR)

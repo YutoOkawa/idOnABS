@@ -2,7 +2,10 @@ from MathABS import ABS
 from charm.toolbox.pairinggroup import PairingGroup
 
 if __name__ == '__main__':
+    userid = 'test'
     attributes = ['CHIEF','SCHIEF','FRESHMAN','HRD','DD']
+    attriList = ['HRD']
+    policy = 'HRD OR SCHIEF'
     group = PairingGroup('MNT159')
     absinst = ABS(group)
 
@@ -17,16 +20,25 @@ if __name__ == '__main__':
     print(ask)
     print(apk)
 
+    userid = userid.upper()
+    attributes.append(userid)
+    attriList.append(userid)
+    policy += ' AND ' + userid
+
+    print(attributes)
+    print(attriList)
+    print(policy)
+
     # AttrGen
     print('\nAttrGen')
-    ska = absinst.generateattributes(ask,['HRD','SCHIEF'],attributes)
+    ska = absinst.generateattributes(ask,attriList,attributes)
     print(ska)
 
     # Sign
     print('\nSign')
-    sign = absinst.sign((tpk,apk),ska,'message','HRD AND SCHIEF',attributes)
+    sign = absinst.sign((tpk,apk),ska,'message',policy,attributes)
     print(sign)
 
     # Verify
     print('\nVerify')
-    print(absinst.verify((tpk,apk),sign,'message','HRD AND SCHIEF',attributes))
+    print(absinst.verify((tpk,apk),sign,'message',policy,attributes))
