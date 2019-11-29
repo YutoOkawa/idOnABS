@@ -1,0 +1,22 @@
+{
+  "name": "idonabs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YutoOkawa/idOnABS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YutoOkawa/idOnABS/issues"
+  },
+  "homepage": "https://github.com/YutoOkawa/idOnABS#readme",
+  "dependencies": {
+    "python-shell": "^1.0.8"
+  }
+}
