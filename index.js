@@ -24,7 +24,7 @@ const absTrusteeSetup = (attributes) => {
         }
         trusteeSetup.send(data);
         trusteeSetup.on('message',function(data) {
-            var tpk = data[0].tpk;
+            var tpk = data.tpk;
             resolve(tpk)
         })
     });
@@ -104,7 +104,7 @@ const absVer = (key_list,sign,message,policy,attributes) => {
 const absSystem = async() => {
     // var key_list;
     var userid = 'test'
-    var attributes = 'SCHIEF,SCHIEF,FRESHMAN,HRD,DD'
+    var attributes = 'CHIEF,SCHIEF,FRESHMAN,HRD,DD'
     var message = "message";
     var policy = "HRD OR SCHIEF";
     // var policy = "DD AND     SCHIEF";
@@ -115,9 +115,9 @@ const absSystem = async() => {
     console.log("Setup Completed.")
     userid = userid.toUpperCase()
     attributes += ','+userid
-    policy += policy + ' AND ' + userid
+    policy +=  ' AND ' + userid
     const ska = await absAttrgen(key_list,attributes);
-    console.log("Key Generated.")
+    console.log("Key Generated.");
     const sign = await absSign(key_list,ska,message,policy,attributes);
     console.log("Sign Generated.");
     const ver = await absVer(key_list,sign,message,policy,attributes);
