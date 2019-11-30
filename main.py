@@ -26,7 +26,7 @@ def sign(absinst,tpk,apk,ska,message,policy,attributes):
     print(sign)
     return sign
 
-def verify(absinst,tpk,apk,sign,message,policy, attributes):
+def verify(absinst,tpk,apk,sign,message,policy,attributes):
     print('\nVerify')
     print(absinst.verify((tpk,apk),sign,message,policy,attributes))
 
@@ -48,17 +48,35 @@ if __name__ == '__main__':
     userid = userid.upper()
     attributes.append(userid)
     attriList.append(userid)
-    policy += ' AND ' + userid
+    policy_a = policy + ' AND ' + userid
 
     print(attributes)
     print(attriList)
-    print(policy)
+    print(policy_a)
 
     # AttrGen
     ska = attrGen(absinst,ask,attriList,attributes)
 
     # Sign
-    sign = sign(absinst,tpk,apk,ska,message,policy,attributes)
+    sign1 = sign(absinst,tpk,apk,ska,message,policy_a,attributes)
 
     # Verify
-    verify(absinst,tpk,apk,sign,message,policy,attributes)
+    verify(absinst,tpk,apk,sign1,message,policy_a,attributes)
+
+    attributes.remove(userid)
+    attriList.remove(userid)
+    
+    userid = 'CYSEC'
+    attributes.append(userid)
+    attriList.append(userid)
+    policy_b = policy + ' AND ' + userid
+
+    print(attributes)
+    print(attriList)
+    print(policy_b)
+
+    # 2nd Sign
+    sign2 = sign(absinst,tpk,apk,ska,message,policy_b,attributes)
+
+    # Verify
+    verify(absinst,tpk,apk,sign2,message,policy_b,attributes)
