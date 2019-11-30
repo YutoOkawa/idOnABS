@@ -4,18 +4,6 @@ let option = {
     mode: 'json'
 };
 
-
-const absSetup = () => {
-    return new Promise((resolve,reject) => {
-        PythonShell.run('setup.py',option,function(err,data) {
-            if (err) throw err;
-            key_list = data[0];
-            // console.log(key_list.ask)
-            resolve(true);
-        });
-    });
-}
-
 const absTrusteeSetup = (attributes) => {
     return new Promise((resolve,reject) => {
         var trusteeSetup = new PythonShell('trusteeSetup.py',option);
@@ -55,7 +43,6 @@ const absAttrgen = (key_list,attributes) => {
         attrgen.send(ask);
         attrgen.on('message',function(data) {
             ska = data.ska;
-            // console.log(ska);
             resolve(ska);
         });
     });
@@ -75,7 +62,6 @@ const absSign = (key_list,ska,message,policy,attributes) => {
         signgen.send(signer);
         signgen.on('message',function(data) {
             var sign = data.sign;
-            // console.log(sign);
             resolve(sign);
         });
     });
@@ -95,20 +81,16 @@ const absVer = (key_list,sign,message,policy,attributes) => {
         verify.send(verifier);
         verify.on('message',function(data) {
             var bool = data.result;
-            // console.log(bool);
             resolve(bool);
         });
     });
 }
 
 const absSystem = async() => {
-    // var key_list;
     var userid = 'test'
     var attributes = 'CHIEF,SCHIEF,FRESHMAN,HRD,DD'
     var message = "message";
     var policy = "HRD OR SCHIEF";
-    // var policy = "DD AND     SCHIEF";
-    // const check = await absSetup();
     const tpk = await absTrusteeSetup(attributes);
     console.log('trustee ok');
     const key_list = await absAuthoritySetup(tpk,attributes);
@@ -125,15 +107,4 @@ const absSystem = async() => {
     else console.log("NG");
 }
 
-absSystem();
-
-
-// var attrgen = new PythonShell('attrgen.py',option);
-// var ask = {
-//    "ask": key_list.ask
-// };
-//attrgen.send(ask);
-//attrgen.on('message',function(data) {
-//    console.log(data)
-//    ska = data[0].ska;
-//})
+absSystem()
