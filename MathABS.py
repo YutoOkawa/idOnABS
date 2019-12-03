@@ -31,15 +31,6 @@ class ABS:
         for i in range(tmax+1): #provide the rest of the generators
             tpk['h{}'.format(i)] = self.group.random(G2)
 
-        """
-        attriblist = {}
-        counter = 2
-        for i in attributes:
-            attriblist[i] = counter
-            counter += 1
-
-        tpk['atr'] = attriblist
-        """
         return tpk
 
     def authoritysetup(self, tpk, attributes):
@@ -49,7 +40,6 @@ class ABS:
         '''
         ask = {}
         apk = {}
-        # tmax = 2 * len(tpk['atr'])
         tmax = len(attributes)+1
 
         group = self.group
@@ -57,7 +47,6 @@ class ABS:
         ask['a0'] = a0
         ask['a'] = a
         ask['b'] = b
-        # ask['atr'] = tpk['atr'] #this is for ease of usage
 
         apk['A0'] = tpk['h0'] ** a0
         for i in range(1,tmax+1): #rest of the whateverifys
